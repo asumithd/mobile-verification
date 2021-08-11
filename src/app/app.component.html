@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="d-flex justify-content-around">
+        <div
+          class="card mt-4 bg-danger border border-primary shadow-lg rounded"
+          style="width: 22rem"
+        >
+          <h5 class="text-white text-center mt-2">Mobile Verification</h5>
+          <form
+            class="card-img-top p-3 mt-3 d-flex justify-content-between"
+            [formGroup]="mobileForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <select
+              class="custom-select mr-1"
+              style="width: 40% !important"
+              name="codeNo"
+              (ngModelChange)="onOptionsSelected()"
+              formControlName="codeNo"
+            >
+              <option value="CODE">CODE</option>
+              <option value="IN" selected>+91</option>
+            </select>
+            <input
+              type="tel"
+              name="phoneNo"
+              formControlName="phoneNo"
+              class="form-control ml-1 mr-1"
+              placeholder="XXXXXXXXXX"
+              pattern="[0-9]{10}"
+              required
+            />
+
+            <button type="submit" class="btn btn-secondary">Submit</button>
+          </form>
+          <hr />
+          <h5 class="text-white text-center">Mobile Verification Details</h5>
+          <div class="card-body">
+            <ul class="list-group" *ngFor="let data of countryList">
+              <li class="list-group-item bg-primary">
+                <div class="d-flex justify-content-between">
+                  <div><b>Carrier</b></div>
+                  <div>{{ data.carrier }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div><b>Code</b></div>
+                  <div>{{ data.country_code }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div><b>Country</b></div>
+                  <div>{{ data.country_name }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div><b>Country prefix</b></div>
+                  <div>{{ data.country_prefix }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div><b>Format</b></div>
+                  <div>{{ data.local_format }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div><b>Location</b></div>
+                  <div>{{ data.location }}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <small [ngClass]="valid ? 'text-success' : 'text-dark'">
+              <b *ngIf="valid">Valid</b>
+              <b *ngIf="!valid">Not Valid</b>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
