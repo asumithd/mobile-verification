@@ -27,11 +27,11 @@ export class AppComponent implements OnInit {
 
     const httpLink = `http://apilayer.net/api/validate?access_key=${access_key}&number=${phone_number}&country_code=${country_code}&format=1`;
 
-    if (location.protocol !== 'https:') {
-      location.replace(
-        `https:${location.href.substring(location.protocol.length)}`
-      );
+    if (window.location.protocol != 'https:') {
+      location.href = location.href.replace('http://', 'https://');
     }
+    console.log(window.location.protocol);
+
     this.http.get(httpLink).subscribe((data) => {
       this.countryList = [...this.countryList, data];
       this.valid = this.countryList[0].valid;
