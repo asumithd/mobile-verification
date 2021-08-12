@@ -26,33 +26,20 @@ export class AppComponent implements OnInit {
     const phone_number = data.phoneNo;
 
     const httpLink = `http://apilayer.net/api/validate?access_key=${access_key}&number=${phone_number}&country_code=${country_code}&format=1`;
-    const body = {
-      dynamicLinkInfo: {
-        domainUriPrefix: 'https://asetapp.page.link',
-        link: `${httpLink}`,
-      },
-      suffix: {
-        option: 'SHORT',
-      },
-    };
 
-    this.http
-      .post(
-        `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyCDeZvGA43xELvKaGa7eLIcqhcRvjQdWak`,
-        body
-      )
-      .subscribe((res: any) => {
-        this.link = res.shortLink;
-        console.log('>>>>', this.link);
-        this.http.get(this.link).subscribe((data) => {
-          this.countryList = [...this.countryList, data];
-          this.valid = this.countryList[0].valid;
-          console.log(this.countryList, 'data');
-        });
-      });
-
+    if (location.protocol !== 'https:') {
+      location.replace(
+        `https:${location.href.substring(location.protocol.length)}`
+      );
+    }
+    this.http.get(httpLink).subscribe((data) => {
+      this.countryList = [...this.countryList, data];
+      this.valid = this.countryList[0].valid;
+      console.log(this.countryList, 'data');
+    });
     this.mobileForm.reset();
   }
+
   onOptionsSelected() {
     this.countryList = [];
   }
