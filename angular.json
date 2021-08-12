@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mobile-varification": {
+    "mobile-verification": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mobile-varification",
+            "outputPath": "dist/mobile-verification",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mobile-varification:build"
+            "browserTarget": "mobile-verification:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mobile-varification:build:production"
+              "browserTarget": "mobile-verification:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mobile-varification:build"
+            "browserTarget": "mobile-verification:build"
           }
         },
         "test": {
@@ -109,16 +110,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mobile-varification:serve"
+            "devServerTarget": "mobile-verification:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mobile-varification:serve:production"
+              "devServerTarget": "mobile-verification:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "mobile-varification"
+  "defaultProject": "mobile-verification"
 }
